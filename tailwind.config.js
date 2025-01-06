@@ -15,7 +15,8 @@ export default {
         primary: "#FF3811",
         title: "#151515",
         text: "#444444",
-        altText: "#737373",
+        nickel: "#737373",
+        platinum: "#E8E8E8",
       },
       fontFamily: {
         inter: ["Inter", "serif"],
