@@ -17,6 +17,7 @@ export default {
         text: "#444444",
         nickel: "#737373",
         platinum: "#E8E8E8",
+        flash_white: "#F3F3F3",
       },
       fontFamily: {
         inter: ["Inter", "serif"],
