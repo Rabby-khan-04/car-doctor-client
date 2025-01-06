@@ -16,9 +16,9 @@ const buttonVariants = cva(
         primary__outline:
           "text-primary border border-primary text-lg font-semibold leading-normal transition-all duration-300 hover:bg-primary hover:text-white",
         secondary__outline:
-          "text-white border border-white text-lg font-semibold leading-normal transition-all duration-300 hover:bg-white hover:text-primary hover:border-primary",
+          "text-white border border-white text-lg font-semibold leading-normal transition-all duration-300 hover:bg-transparent hover:text-primary hover:border-primary",
         primary:
-          "text-white bg-primary border border-primary text-lg font-semibold leading-normal transition-all duration-300 hover:bg-white hover:text-primary",
+          "text-white bg-primary border border-primary text-lg font-semibold leading-normal transition-all duration-300 hover:bg-transparent hover:text-primary",
         secondary:
           "bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
         ghost:
@@ -27,7 +27,7 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "rounded-md px-3 px-[22px]",
+        sm: "rounded-md px-3 px-6",
         lg: "rounded-md py-3 px-7",
         icon: "h-10 w-10",
       },
