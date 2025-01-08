@@ -44,7 +44,7 @@ const ChooseUsSection = () => {
           text="We stand out by offering unparalleled expertise, reliability, and quality in car repair and maintenance services. Our core features are designed to provide a seamless experience, from expert diagnostics to timely repairs, ensuring your vehicle runs smoothly and efficiently. Trust us to deliver exceptional results that exceed expectations every time."
         />
 
-        <div className="grid grid-cols-6 gap-6">
+        <div className="grid grid-cols-6 gap-6 pt-5">
           {features.map((feature, idx) => (
             <FeatureCard key={idx} idx={idx} feature={feature} />
           ))}

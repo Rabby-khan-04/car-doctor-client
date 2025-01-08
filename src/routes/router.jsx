@@ -6,6 +6,7 @@ import About from "@/pages/About";
 import Services from "@/pages/Services";
 import Blog from "@/pages/Blog";
 import Contact from "@/pages/Contact";
+import Service from "@/pages/Service";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "services",
         element: <Services />,
+      },
+      {
+        path: "service/:id",
+        element: <Service />,
       },
       {
         path: "blog",

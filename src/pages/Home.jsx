@@ -5,6 +5,7 @@ import ContactSection from "@/components/Home/Contact/ContactSection";
 import PopularProducts from "@/components/Home/Product/PopularProducts";
 import ServiceArea from "@/components/Home/Service/ServiceArea";
 import TeamSection from "@/components/Home/Team/TeamSection";
+import TestimonialSection from "@/components/Home/Testimonial/TestimonialSection";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <PopularProducts />
       <TeamSection />
       <ChooseUsSection />
+      <TestimonialSection />
     </main>
   );
 };
