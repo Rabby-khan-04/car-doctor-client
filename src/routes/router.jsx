@@ -7,6 +7,7 @@ import Services from "@/pages/Services";
 import Blog from "@/pages/Blog";
 import Contact from "@/pages/Contact";
 import Service from "@/pages/Service";
+import Checkout from "@/pages/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
     ],
   },
