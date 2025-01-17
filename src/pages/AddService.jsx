@@ -4,46 +4,46 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 
-const Checkout = () => {
+const AddService = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleCheckout = (data) => console.log(data);
+  const handleAddService = (data) => console.log(data);
 
   return (
     <main>
-      {/* Checkout banner */}
+      {/* Add Service Banner */}
       <section>
         <div className="container">
-          <SectionBanner title="Checkout" />
+          <SectionBanner title="Add New Service" />
         </div>
       </section>
 
       {/* Checkout form */}
       <section className="py-32">
         <div className="container bg-flash_white rounded-xl p-24">
-          <form onSubmit={handleSubmit(handleCheckout)} className="space-y-6">
+          <form onSubmit={handleSubmit(handleAddService)} className="space-y-6">
             <div className="flex items-center gap-6">
               <div className="space-y-3 w-full">
                 <Input
                   type="text"
-                  placeholder="First Name"
-                  {...register("first_name", { required: true })}
+                  placeholder="Service Name"
+                  {...register("name", { required: true })}
                 />
-                {errors.first_name && (
+                {errors.name && (
                   <p className="text-xs text-red-500">This field is required</p>
                 )}
               </div>
               <div className="space-y-3 w-full">
                 <Input
-                  type="text"
-                  placeholder="Last Name"
-                  {...register("last_name", { required: true })}
+                  type="number"
+                  placeholder="Service Price"
+                  {...register("price", { required: true })}
                 />
-                {errors.last_name && (
+                {errors.price && (
                   <p className="text-xs text-red-500">This field is required</p>
                 )}
               </div>
@@ -51,21 +51,21 @@ const Checkout = () => {
             <div className="flex items-center gap-6">
               <div className="space-y-3 w-full">
                 <Input
-                  type="tel"
-                  placeholder="Your Phone"
-                  {...register("phone", { required: true })}
+                  type="url"
+                  placeholder="Photo URL"
+                  {...register("photo", { required: true })}
                 />
-                {errors.phone && (
+                {errors.photo && (
                   <p className="text-xs text-red-500">This field is required</p>
                 )}
               </div>
               <div className="space-y-3 w-full">
                 <Input
-                  type="email"
-                  placeholder="Your Email"
-                  {...register("email", { required: true })}
+                  type="text"
+                  placeholder="Service Type"
+                  {...register("type", { required: true })}
                 />
-                {errors.email && (
+                {errors.type && (
                   <p className="text-xs text-red-500">This field is required</p>
                 )}
               </div>
@@ -73,13 +73,16 @@ const Checkout = () => {
 
             <div className="space-y-3 w-full">
               <Textarea
-                placeholder="Your Message"
-                {...register("message", {})}
+                placeholder="Product Description"
+                {...register("description", { required: true })}
               />
+              {errors.description && (
+                <p className="text-xs text-red-500">This field is required</p>
+              )}
             </div>
 
             <Button type="submit" variant="primary" size="full">
-              Order Confirm
+              Submit
             </Button>
           </form>
         </div>
@@ -88,4 +91,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default AddService;

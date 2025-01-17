@@ -8,6 +8,7 @@ import Blog from "@/pages/Blog";
 import Contact from "@/pages/Contact";
 import Service from "@/pages/Service";
 import Checkout from "@/pages/Checkout";
+import AddService from "@/pages/AddService";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <Checkout />,
+      },
+      {
+        path: "add-service",
+        element: <AddService />,
       },
     ],
   },
