@@ -11,6 +11,8 @@ import Checkout from "@/pages/Checkout";
 import AddService from "@/pages/AddService";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
+import Cart from "@/pages/Cart";
+import ManageInventory from "@/pages/ManageInventory";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "manage-inventory",
+        element: <ManageInventory />,
       },
     ],
   },
