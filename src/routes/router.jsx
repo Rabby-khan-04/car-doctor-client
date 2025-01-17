@@ -9,6 +9,8 @@ import Contact from "@/pages/Contact";
 import Service from "@/pages/Service";
 import Checkout from "@/pages/Checkout";
 import AddService from "@/pages/AddService";
+import Login from "@/pages/Login";
+import Register from "@/pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
       {
         path: "add-service",
         element: <AddService />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },
