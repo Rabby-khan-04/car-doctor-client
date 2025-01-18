@@ -2,7 +2,10 @@ import AuthContext from "@/context/AuthContext";
 import auth from "@/firebasel/firebase.config";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
   updateProfile,
 } from "firebase/auth";
 import PropTypes from "prop-types";
@@ -17,12 +20,20 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  const loginUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const sighInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, new GoogleAuthProvider());
+  };
+
   const updateUserProfile = (info) => {
     setLoading(true);
     return updateProfile(auth.currentUser, info);
   };
-
-  console.log(user);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -38,7 +49,14 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const authInfo = { user, loading, createUser, updateUserProfile };
+  const authInfo = {
+    user,
+    loading,
+    createUser,
+    updateUserProfile,
+    loginUser,
+    sighInWithGoogle,
+  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

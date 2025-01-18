@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import SocialLogin from "@/components/Auth/SocialLogin";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "@/context/AuthContext";
+import Toast from "@/utils/toast";
 
 const Login = () => {
   const {
@@ -12,7 +15,21 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const handleSignin = (data) => console.log(data);
+  const { loginUser } = useContext(AuthContext);
+
+  const handleSignin = async (data) => {
+    const email = data.email;
+    const password = data.password;
+
+    try {
+      const response = await loginUser(email, password);
+      if (response.user) {
+        Toast.fire({ icon: "success", text: "User logged in successfully" });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className="pb-32 pt-6">

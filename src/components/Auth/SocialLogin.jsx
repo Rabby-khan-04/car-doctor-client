@@ -1,11 +1,25 @@
+import AuthContext from "@/context/AuthContext";
+import Toast from "@/utils/toast";
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 
 const SocialLogin = ({ title }) => {
+  const { sighInWithGoogle } = useContext(AuthContext);
+
   const handleFacebookLogin = () => {};
   const handleLinkedinLogin = () => {};
-  const handleGoogleLogin = () => {};
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await sighInWithGoogle();
+      if (response.user) {
+        Toast.fire({ icon: "success", text: "User logged in successfully" });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="mt-8 mb-12">
