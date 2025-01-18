@@ -2,6 +2,9 @@ import signUpImg from "@/assets/images/auth/login.svg";
 import SocialLogin from "@/components/Auth/SocialLogin";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import AuthContext from "@/context/AuthContext";
+import Toast from "@/utils/toast";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -12,7 +15,30 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleSignup = (data) => console.log(data);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+
+  const handleSignup = async (data) => {
+    const displayName = data.name;
+    const email = data.email;
+    const password = data.password;
+    try {
+      const response = await createUser(email, password);
+      if (response.user) {
+        updateUserProfile({ displayName })
+          .then(() => {
+            Toast.fire({
+              icon: "success",
+              text: "User registered successfully",
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className="pb-32 pt-6">
