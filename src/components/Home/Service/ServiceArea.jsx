@@ -1,8 +1,23 @@
 import SectionTitle from "@/components/shared/SectionTitle";
 import ServiceCard from "./ServiceCard";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ServiceArea = () => {
+  const [services, setServices] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("./services.json");
+      setServices(response.data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <section className="pt-32">
       <div className="container">
@@ -13,13 +28,17 @@ const ServiceArea = () => {
         />
 
         <div className="mt-5 grid grid-cols-3 gap-6 mb-12">
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
+          {services.map((service) => (
+            <ServiceCard key={service._id} service={service} />
+          ))}
         </div>
 
         <div className="text-center">
-          <Button variant="primary__outline" size="lg">
+          <Button
+            onClick={() => navigate("/services")}
+            variant="primary__outline"
+            size="lg"
+          >
             More Services
           </Button>
         </div>

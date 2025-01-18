@@ -1,4 +1,4 @@
-import CartItem from "@/components/Cart/CartItem";
+import OrderCard from "@/components/ManageInventory/OrderCard";
 import SectionBanner from "@/components/shared/SectionBanner";
 
 const ManageInventory = () => {
@@ -15,7 +15,7 @@ const ManageInventory = () => {
       <section className="py-32">
         <div className="container">
           <div className="grid grid-cols-1 gap-7 mb-12">
-            <CartItem />
+            <OrderCard />
           </div>
         </div>
       </section>

@@ -1,7 +1,18 @@
 import { RxCross2 } from "react-icons/rx";
 import serviceImg from "@/assets/images/services/1.jpg";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useState } from "react";
 
 const OrderCard = () => {
+  const [selectValue, setSelectValue] = useState("Approved");
+
   return (
     <div className="flex items-center gap-8">
       {/* Delete Button */}
@@ -39,9 +50,21 @@ const OrderCard = () => {
 
       {/* Action Button */}
       <div className="grow text-end">
-        <p className="text-xl font-semibold text-white bg-primary inline-block py-2 px-5 rounded-xl">
-          Pending
-        </p>
+        <Select
+          value={selectValue}
+          onValueChange={(value) => setSelectValue(value)}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder={selectValue} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="Approved">Approved</SelectItem>
+              <SelectItem value="Canceled">Canceled</SelectItem>
+              <SelectItem value="Pending">Pending</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
