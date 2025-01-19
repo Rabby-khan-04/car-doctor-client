@@ -9,6 +9,9 @@ const SellingPoint = ({ title, description }) => {
   );
 };
 
-SellingPoint.propTypes = {};
+SellingPoint.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};
 
 export default SellingPoint;

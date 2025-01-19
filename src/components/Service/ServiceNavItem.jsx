@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { GoArrowRight } from "react-icons/go";
 import { NavLink } from "react-router-dom";
 
-const ServiceNavItem = ({ name, id }) => {
+const ServiceNavItem = ({ title, id }) => {
   return (
     <NavLink
       to={`/service/${id}`}
@@ -13,7 +13,7 @@ const ServiceNavItem = ({ name, id }) => {
     >
       {({ isActive }) => (
         <>
-          <span>{name || "Full Car Repair"}</span>
+          <span>{title || "Full Car Repair"}</span>
           <GoArrowRight
             className={`text-2xl ${isActive ? "text-white" : "text-primary"}`}
           />
@@ -24,7 +24,7 @@ const ServiceNavItem = ({ name, id }) => {
 };
 
 ServiceNavItem.propTypes = {
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 

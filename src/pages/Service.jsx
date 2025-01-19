@@ -1,7 +1,9 @@
 import ServiceBody from "@/components/Service/ServiceBody";
 import SectionBanner from "@/components/shared/SectionBanner";
+import { useLoaderData } from "react-router-dom";
 
 const Service = () => {
+  const { data } = useLoaderData();
   return (
     <main>
       <section>
@@ -10,7 +12,7 @@ const Service = () => {
         </div>
       </section>
 
-      <ServiceBody />
+      <ServiceBody service={data} />
     </main>
   );
 };

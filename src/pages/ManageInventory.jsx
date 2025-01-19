@@ -1,7 +1,21 @@
 import OrderCard from "@/components/ManageInventory/OrderCard";
 import SectionBanner from "@/components/shared/SectionBanner";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const ManageInventory = () => {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:5000/bookings");
+
+      setOrders(response.data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <main>
       {/* Section Banner */}
@@ -15,7 +29,14 @@ const ManageInventory = () => {
       <section className="py-32">
         <div className="container">
           <div className="grid grid-cols-1 gap-7 mb-12">
-            <OrderCard />
+            {orders.map((order) => (
+              <OrderCard
+                key={order._id}
+                order={order}
+                orders={orders}
+                setOrders={setOrders}
+              />
+            ))}
           </div>
         </div>
       </section>

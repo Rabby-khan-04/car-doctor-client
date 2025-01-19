@@ -8,30 +8,24 @@ import ServiceNavItem from "./ServiceNavItem";
 import ServiceDocument from "./ServiceDocument";
 import logo from "@/assets/logo-white.svg";
 import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const ServiceBody = (props) => {
-  const sellingPoints = [
-    {
-      title: "Instant Car Services",
-      description:
-        "It uses a dictionary of over 200 Latin words, combined with a model sentence structures.",
-    },
-    {
-      title: "24/7 Quality Service",
-      description:
-        "It uses a dictionary of over 200 Latin words, combined with a model sentence structures.",
-    },
-    {
-      title: "Easy Customer Service",
-      description:
-        "It uses a dictionary of over 200 Latin words, combined with a model sentence structures.",
-    },
-    {
-      title: "Quality Cost Service",
-      description:
-        "It uses a dictionary of over 200 Latin words, combined with a model sentence structures.",
-    },
-  ];
+const ServiceBody = ({ service }) => {
+  const [servicesNames, setServicesNames] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:5000/services-name");
+      setServicesNames(response.data);
+    };
+
+    fetchData();
+  }, []);
+
+  const { _id, title, img, price, description, facility } = service;
 
   const servicingProcessStep = [
     {
@@ -57,32 +51,23 @@ const ServiceBody = (props) => {
           {/* Service Image */}
           <div>
             <img
-              src={bannerImg}
+              src={img || bannerImg}
               className="inline-block h-[400px] rounded-xl w-full object-cover object-center"
               alt=""
             />
           </div>
           {/* Service Description */}
           <div className="space-y-8">
-            <h2 className="text-title text-4xl font-bold">
-              Unique Car Engine Service
-            </h2>
-            <p className="text-nickel text-base">
-              There are many variations of passages of Lorem Ipsum available,
-              but the majority have suffered alteration in some form, by
-              injected humour, or randomised words which don{`'`}t look even
-              slightly believable. If you are going to use a passage of Lorem
-              Ipsum, you need to be sure there isn{`'`}t anything embarrassing
-              hidden in the middle of text.{" "}
-            </p>
+            <h2 className="text-title text-4xl font-bold">{title}</h2>
+            <p className="text-nickel text-base">{description}</p>
 
             {/* Selling points */}
             <div className="grid grid-cols-2 gap-6">
-              {sellingPoints.map((sellingPoint, idx) => (
+              {facility.map((sellingPoint, idx) => (
                 <SellingPoint
                   key={idx}
-                  title={sellingPoint.title}
-                  description={sellingPoint.description}
+                  title={sellingPoint.name}
+                  description={sellingPoint.details}
                 />
               ))}
             </div>
@@ -137,50 +122,62 @@ const ServiceBody = (props) => {
         </div>
 
         {/* Service sidebar */}
-        <div className="space-y-8">
-          {/* Service navigation */}
-          <div className="bg-flash_white rounded-xl p-10 space-y-5">
-            <h3 className="text-2xl font-bold text-title">Services</h3>
-            <ServiceNavItem id="1" />
-            <ServiceNavItem id="2" />
-            <ServiceNavItem id="3" />
-          </div>
+        <div className="relative">
+          <div className="space-y-8 sticky top-8">
+            {/* Service navigation */}
+            <div className="bg-flash_white rounded-xl p-10 space-y-5">
+              <h3 className="text-2xl font-bold text-title">Services</h3>
 
-          {/* Service Download Files */}
-          <div className="space-y-5 p-10 rounded-xl bg-title">
-            <h3 className="text-2xl font-bold text-white">Download</h3>
-            <ServiceDocument text="Our Brochure" />
-            <ServiceDocument text="Company Details" />
-          </div>
+              {servicesNames.map((service) => (
+                <ServiceNavItem
+                  key={service._id}
+                  id={service._id}
+                  title={service.title}
+                />
+              ))}
+            </div>
 
-          {/* Service CTA */}
-          <div className="space-y-5 px-12 pt-12 pb-16 rounded-xl bg-title text-center">
-            <img src={logo} className="inline-block w-36" alt="" />
-            <h3 className="text-xl text-white font-bold">
-              Need Help? We Are Here To Help You
-            </h3>
-            <div className="px-11 pt-5 pb-9 bg-white rounded-xl text-center relative">
-              <h3 className="text-title text-xl font-bold">
-                <span className="text-primary">Car Doctor</span> Special
+            {/* Service Download Files */}
+            <div className="space-y-5 p-10 rounded-xl bg-title">
+              <h3 className="text-2xl font-bold text-white">Download</h3>
+              <ServiceDocument text="Our Brochure" />
+              <ServiceDocument text="Company Details" />
+            </div>
+
+            {/* Service CTA */}
+            <div className="space-y-5 px-12 pt-12 pb-16 rounded-xl bg-title text-center">
+              <img src={logo} className="inline-block w-36" alt="" />
+              <h3 className="text-xl text-white font-bold">
+                Need Help? We Are Here To Help You
               </h3>
-              <p className="text-nickel font-bold">
-                Save up to <span className="text-primary">60% off</span>
-              </p>
-              <div className="absolute mx-auto left-0 right-0 -bottom-7">
-                <Button variant="primary" size="lg">
-                  Get A Quote
-                </Button>
+              <div className="px-11 pt-5 pb-9 bg-white rounded-xl text-center relative">
+                <h3 className="text-title text-xl font-bold">
+                  <span className="text-primary">Car Doctor</span> Special
+                </h3>
+                <p className="text-nickel font-bold">
+                  Save up to <span className="text-primary">60% off</span>
+                </p>
+                <div className="absolute mx-auto left-0 right-0 -bottom-7">
+                  <Button variant="primary" size="lg">
+                    Get A Quote
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Price And Checkout */}
-          <div className="space-y-8">
-            <h3 className="text-4xl text-title font-bold">Price $250.00</h3>
+            {/* Price And Checkout */}
+            <div className="space-y-8">
+              <h3 className="text-4xl text-title font-bold">Price ${price}</h3>
 
-            <Button variant="primary" size="lg" className="w-full">
-              Proceed Checkout
-            </Button>
+              <Button
+                onClick={() => navigate(`/checkout/${_id}`)}
+                variant="primary"
+                size="lg"
+                className="w-full"
+              >
+                Proceed Checkout
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -188,6 +185,8 @@ const ServiceBody = (props) => {
   );
 };
 
-ServiceBody.propTypes = {};
+ServiceBody.propTypes = {
+  service: PropTypes.object.isRequired,
+};
 
 export default ServiceBody;

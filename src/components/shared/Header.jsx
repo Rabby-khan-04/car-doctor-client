@@ -1,8 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { Button } from "../ui/button";
-import { IoSearchOutline } from "react-icons/io5";
+// import { IoSearchOutline } from "react-icons/io5";
 import { SlHandbag } from "react-icons/sl";
+import { AiFillProduct } from "react-icons/ai";
 
 const Header = () => {
   const navLinks = (
@@ -73,11 +74,11 @@ const Header = () => {
         </ul>
 
         <div className="flex items-center gap-6 w-[260px]">
-          <Link to="" className="text-text text-xl">
+          <Link to="/cart" className="text-text text-xl">
             <SlHandbag />
           </Link>
-          <Link to="" className="text-text text-xl">
-            <IoSearchOutline />
+          <Link to="/manage-inventory" className="text-text text-xl">
+            <AiFillProduct />
           </Link>
           <Button variant="primary__outline" size="lg">
             Appointment

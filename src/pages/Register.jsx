@@ -6,9 +6,11 @@ import AuthContext from "@/context/AuthContext";
 import Toast from "@/utils/toast";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -30,6 +32,7 @@ const Register = () => {
               icon: "success",
               text: "User registered successfully",
             });
+            navigate(location.state || "/");
           })
           .catch((err) => {
             console.error(err);

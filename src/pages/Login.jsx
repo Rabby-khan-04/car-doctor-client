@@ -3,12 +3,15 @@ import signinImg from "@/assets/images/auth/login.svg";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import SocialLogin from "@/components/Auth/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "@/context/AuthContext";
 import Toast from "@/utils/toast";
 
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -25,6 +28,7 @@ const Login = () => {
       const response = await loginUser(email, password);
       if (response.user) {
         Toast.fire({ icon: "success", text: "User logged in successfully" });
+        navigate(location.state || "/");
       }
     } catch (error) {
       console.error(error);

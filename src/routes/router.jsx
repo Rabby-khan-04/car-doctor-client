@@ -13,6 +13,8 @@ import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Cart from "@/pages/Cart";
 import ManageInventory from "@/pages/ManageInventory";
+import axios from "axios";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,8 @@ const router = createBrowserRouter([
       {
         path: "service/:id",
         element: <Service />,
+        loader: ({ params }) =>
+          axios.get(`http://localhost:5000/service/${params.id}`),
       },
       {
         path: "blog",
@@ -45,12 +49,22 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "checkout",
-        element: <Checkout />,
+        path: "checkout/:id",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          axios.get(`http://localhost:5000/service/${params.id}`),
       },
       {
         path: "add-service",
-        element: <AddService />,
+        element: (
+          <PrivateRoute>
+            <AddService />
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
@@ -62,7 +76,11 @@ const router = createBrowserRouter([
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
       },
       {
         path: "manage-inventory",
